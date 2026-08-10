@@ -1,0 +1,97 @@
+/* Core Design System Variables */
+
+:root {
+  /* Primary Colors - New Color Palette */
+  --primary: #61C3B4; /* Teal/Turquoise */
+  --primary-light: #79C9A0; /* Light Green */
+  --primary-dark: #4da89a;
+  --primary-lighter: #d4f3ee;
+  --primary-subtle: #e8f9f6;
+  
+  /* Accent Colors - Therapeutic palette */
+  --accent-coral: #EC896E; /* Coral/Red */
+  --accent-coral-light: #f2a68f;
+  --accent-peach: #F6BA82; /* Peach/Orange */
+  --accent-peach-light: #f9cb9f;
+  --accent-sky: #5EBEB0; /* Teal */
+  --accent-mint: #79C9A0; /* Mint Green */
+  --accent-teal: #61C3B4; /* Teal */
+  
+  /* Neutral Colors - Warm and gentle */
+  --white: #f8f6f3;
+  --pure-white: #ffffff;
+  --light-gray: #f0ede7;
+  --medium-gray: #8b94a8;
+  --dark-gray: #5a6477;
+  --charcoal: #2d3748;
+  --light-border: #e5e1d8;
+  --warm-border: #ddd6c8;
+  
+  /* Status Colors - Using new palette */
+  --success: #79C9A0; /* Green */
+  --success-light: #a3dbb9;
+  --warning: #F6BA82; /* Peach */
+  --warning-light: #f9d1a8;
+  --danger: #EC896E; /* Coral */
+  --danger-light: #f2ad96;
+  --info: #5EBEB0; /* Teal */
+  --info-light: #8ed4ca;
+  
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  
+  /* Border Radius - Soft and friendly */
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --radius-soft: 20px;
+  
+  /* Transitions */
+  --transition: 0.3s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Light Theme */
+  --bg-primary: #f8f6f3;
+  --bg-secondary: #f0ede7;
+  --bg-tertiary: #fdfcfa;
+  --text-primary: #2d3748;
+  --text-secondary: #5a6477;
+  --text-muted: #8b94a8;
+  --card-bg: #fdfcfa;
+  --card-hover: #ffffff;
+  --border-color: #e5e1d8;
+  --shadow-sm: 0 2px 8px rgba(45, 55, 72, 0.08);
+  --shadow-md: 0 4px 16px rgba(45, 55, 72, 0.12);
+  --shadow-lg: 0 8px 24px rgba(45, 55, 72, 0.16);
+}
+
+/* Dark Theme - Deep blue for restful, night-friendly experience */
+[data-theme="dark"] {
+  --bg-primary: #1a2332;
+  --bg-secondary: #0f1419;
+  --bg-tertiary: #212d3f;
+  --text-primary: #e8eef5;
+  --text-secondary: #b4bcc8;
+  --text-muted: #8891a1;
+  --card-bg: #243142;
+  --card-hover: #2a3748;
+  --border-color: #344053;
+  --light-gray: #0f1419;
+  --charcoal: #e8eef5;
+  --light-border: #344053;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  
+  /* Adjust primary colors for dark mode */
+  --primary: #61C3B4;
+  --primary-light: #79C9A0;
+  --primary-lighter: #2a4a46;
+  --accent-coral: #EC896E;
+  --accent-peach: #F6BA82;
+  --accent-sky: #5EBEB0;
+}
