@@ -66,8 +66,7 @@ class GeminiService {
       return;
     }
 
-    const maskedKey = `${apiKey.slice(0, 6)}...${apiKey.slice(-4)}`;
-    console.log(`[Groq] 🔑 Initializing with API key: ${maskedKey}`);
+    console.log('[Groq] 🔑 Initializing Groq client with configured API key');
 
     try {
       this.groq = new Groq({ apiKey });

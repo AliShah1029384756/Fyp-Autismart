@@ -221,7 +221,8 @@ export const generateChildReport = asyncHandler(async (req, res) => {
 
     // Set response headers with proper CORS
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || 'http://localhost:5173');
+    const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition');
     res.setHeader(
