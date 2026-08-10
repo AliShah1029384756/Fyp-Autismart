@@ -2,6 +2,10 @@
 
 > **A full-stack, AI-powered web platform designed to support autism care workflows through screening, assessment, progress tracking, caregiver guidance, and therapy-oriented activities.**
 
+### 🔗 Live Demo
+
+**[🚀 Visit AutiSmart](https://auti-smart.vercel.app/)**
+
 AutiSmart is a Final Year Project developed to bridge the gap between **autism care, digital assessment, caregiver support, and AI-powered assistance**.
 
 The platform provides role-based access for **Caregivers, Experts, and Administrators**, allowing users to manage children, conduct assessments, track progress, generate reports, and access personalized activities and AI-assisted recommendations.
