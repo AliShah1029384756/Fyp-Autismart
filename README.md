@@ -8,7 +8,7 @@
 
 ### 📂 Source Code
 
-**[View the GitHub Repository](https://github.com/AliShah102938475475?tab=readme-ov-file)**
+**[View this repository](https://github.com/AliShah1029384756/Fyp-Autismart)**
 
 > **Final Team FYP:** This is the final project presented by our team. It is separate from the author's personal experimental AutiSmart work.
 
