@@ -1,92 +1,55 @@
-# 🧩 AutiSmart — AI-Powered Autism Support Platform
+# 🧩 AutiSmart — AI-Assisted Autism Care & Assessment Platform
 
-> **A full-stack, AI-powered web platform designed to support autism care workflows through screening, assessment, progress tracking, caregiver guidance, and therapy-oriented activities.**
+> **A full-stack Final Year Project designed to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
 
-### 🔗 Live Demo
+### 🚀 Live Preview
 
-**[🚀 Visit AutiSmart](https://auti-smart.vercel.app/)**
+**[Open AutiSmart](https://auti-smart.vercel.app/)**
 
-AutiSmart is a Final Year Project developed to bridge the gap between **autism care, digital assessment, caregiver support, and AI-powered assistance**.
+### 📂 Source Code
 
-The platform provides role-based access for **Caregivers, Experts, and Administrators**, allowing users to manage children, conduct assessments, track progress, generate reports, and access personalized activities and AI-assisted recommendations.
+**[View the GitHub Repository](https://github.com/AliShah102938475475?tab=readme-ov-file)**
+
+> **Final Team FYP:** This is the final project presented by our team. It is separate from the author's personal experimental AutiSmart work.
 
 ---
 
 ## ✨ Key Features
 
-### 🔐 Role-Based Authentication
+- 🔐 Role-based authentication for **Caregivers, Experts, and Administrators**
+- 👶 Child profiles and caregiver management
+- 🧠 Structured autism assessment workflows and assessment history
+- 📈 Progress tracking, statistics, and reports
+- 🤖 AI-assisted caregiver guidance and recommendations using the Groq API
+- 📧 Email OTP verification and account workflows
+- 🎮 Therapy-oriented activities, games, and emotion-based exercises
+- 📊 Dashboards and data visualisation
+- 🛡️ Administrative user and assessment management
 
-* Caregiver, Expert, and Admin roles
-* JWT-based authentication
-* Email OTP verification during registration
-* Protected routes and role-based authorization
-* Password change functionality
-* Secure user session management
+> **Medical note:** AutiSmart is an academic and assistive software project. Its assessments and AI-generated guidance are not a substitute for professional clinical diagnosis or treatment.
 
-### 👶 Child Management
+## 🛠️ Technology Stack
 
-Caregivers can:
+### Frontend
 
-* Add and manage children
-* Maintain child profiles
-* Track developmental information
-* View child-specific assessments and activities
-* Monitor progress over time
+- React 19
+- Vite 7
+- React Router
+- Axios
+- Bootstrap
+- Bootstrap Icons
 
-### 🧠 Autism Assessments
+### Backend
 
-* Assessment management and storage
-* Multiple assessment levels
-* Child-specific quiz generation
-* Assessment result submission
-* Assessment history
-* Progress tracking
-* Personalized recommendations based on results
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Nodemailer
+- Groq SDK / API
 
-### 🤖 AI-Powered Features
-
-AutiSmart integrates AI capabilities to provide:
-
-* AI-powered caregiver guidance
-* Personalized recommendations
-* Emotion Explorer assistance
-* Game/activity recommendations
-* AI-generated assessment/quiz support
-* Natural-language assistance through the Groq API
-
-> **Note:** AI-generated information is intended to provide supportive guidance and should not be considered a substitute for professional medical diagnosis or clinical advice.
-
-### 🎮 Therapy-Oriented Activities & Games
-
-The platform includes interactive activities designed to support child engagement and learning, including:
-
-* Educational games
-* Emotion-based activities
-* Interactive exercises
-* Personalized activity recommendations
-
-### 📊 Reports & Progress Tracking
-
-* Child activity statistics
-* Assessment history
-* Progress reports
-* Developmental tracking
-* Caregiver-facing insights
-
-### 🛡️ Admin Dashboard
-
-Administrators can manage:
-
-* Users
-* User roles
-* Account verification
-* Assessments
-* Assessment availability/status
-* Platform statistics
-
----
-
-# 🏗️ System Architecture
+## 🏗️ System Architecture
 
 ```text
                     ┌───────────────────────────┐
@@ -110,44 +73,10 @@ Administrators can manage:
       └──────────────┘    └──────────────┘    └──────────────┘
 ```
 
----
-
-# 🛠️ Tech Stack
-
-## Frontend
-
-* React 19
-* Vite 7
-* React Router
-* Axios
-* Bootstrap
-* Bootstrap Icons
-
-## Backend
-
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-* JWT Authentication
-* Nodemailer
-* Groq SDK
-
-## AI
-
-* Groq API
-* AI-powered recommendations
-* AI-assisted quiz generation
-* Natural-language caregiver assistance
-* Emotion-related assistance
-
----
-
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
-FYP-autismart/
-│
+Fyp-Autismart/
 ├── backend/
 │   ├── config/
 │   ├── controllers/
@@ -159,7 +88,6 @@ FYP-autismart/
 │   ├── services/
 │   ├── env.js
 │   └── server.js
-│
 ├── frontend/
 │   ├── public/
 │   └── src/
@@ -169,512 +97,210 @@ FYP-autismart/
 │       ├── pages/
 │       ├── services/
 │       └── views/
-│
-├── README.md
-└── package files
+├── docs/
+└── README.md
 ```
 
----
+## 🔌 Core API
 
-# 🔌 Core API Routes
+### Authentication — `/api/auth`
 
-## Authentication
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/register` | Register a user |
+| POST | `/verify-otp` | Verify registration OTP |
+| POST | `/login` | Authenticate and receive JWT |
+| POST | `/resend-otp` | Resend verification OTP |
+| GET | `/profile` | Get authenticated profile |
+| PUT | `/change-password` | Change password |
 
-Base URL:
+### Admin — `/api/admin`
 
-```text
-/api/auth
-```
+User management, role management, account verification, assessment management, and platform statistics.
 
-| Method | Endpoint           | Description                       |
-| ------ | ------------------ | --------------------------------- |
-| POST   | `/register`        | Register a new user               |
-| POST   | `/verify-otp`      | Verify registration OTP           |
-| POST   | `/login`           | Authenticate user and receive JWT |
-| POST   | `/resend-otp`      | Resend verification OTP           |
-| GET    | `/profile`         | Get authenticated user profile    |
-| PUT    | `/change-password` | Change account password           |
+### Caregiver / Child — `/api/caregiver`
 
----
+Child management, activities, statistics, reports, Emotion Explorer AI, and game recommendations.
 
-## Admin
+### Assessments — `/api/assessments`
 
-Base URL:
+Assessment levels, child-specific quizzes, result submission, history, and assessment management.
 
-```text
-/api/admin
-```
-
-Admin-only functionality includes:
-
-* User management
-* User role management
-* Account verification
-* Assessment management
-* Assessment CRUD operations
-* Assessment status toggling
-* Platform statistics
-
----
-
-## Caregiver / Child
-
-Base URL:
+## 🔐 Authentication Flow
 
 ```text
-/api/caregiver
-```
-
-Protected functionality includes:
-
-* Child CRUD operations
-* Child activities
-* Child statistics
-* Reports
-* Emotion Explorer AI
-* Game recommendations
-
----
-
-## Assessments
-
-Base URL:
-
-```text
-/api/assessments
-```
-
-Features include:
-
-* Global assessments
-* Assessment levels
-* Child-specific quiz generation
-* Quiz retrieval
-* Result submission
-* Assessment history
-
----
-
-# 🔐 Authentication Flow
-
-```text
-User Registration
-       │
-       ▼
-OTP Sent via Email
-       │
-       ▼
-OTP Verification
-       │
-       ▼
-JWT Token Generated
-       │
-       ▼
-Token Stored by Frontend
-       │
-       ▼
+Registration
+    ↓
+Email OTP Verification
+    ↓
+JWT Authentication
+    ↓
 Protected API Requests
-       │
-       ▼
+    ↓
 Role-Based Authorization
 ```
 
-The frontend sends the JWT token with protected requests:
+Protected requests use:
 
 ```text
 Authorization: Bearer <JWT_TOKEN>
 ```
 
----
+## ⚙️ Environment Configuration
 
-# ⚙️ Environment Configuration
+Create the required environment files locally. **Never commit real credentials, API keys, passwords, JWT secrets, or database connection strings.**
 
-Create a `.env` file inside the `backend` directory.
+Backend variables include:
 
 ```env
 PORT=5000
-
 MONGO_URI=<your_mongodb_connection_string>
-
 JWT_SECRET=<your_jwt_secret>
-
-EMAIL=<your_gmail_address>
+EMAIL=<your_email>
 EMAIL_PASS=<your_gmail_app_password>
-
 GROQ_API_KEY=<your_groq_api_key>
-
 NODE_ENV=development
 ```
 
-### Environment Variables
+Frontend:
 
-| Variable       | Purpose                       |
-| -------------- | ----------------------------- |
-| `PORT`         | Backend server port           |
-| `MONGO_URI`    | MongoDB connection string     |
-| `JWT_SECRET`   | JWT signing secret            |
-| `EMAIL`        | Gmail account used for emails |
-| `EMAIL_PASS`   | Gmail App Password            |
-| `GROQ_API_KEY` | Groq API authentication       |
-| `NODE_ENV`     | Application environment       |
+```env
+VITE_API_URL=http://localhost:5000/api
+```
 
-> ⚠️ **Never commit real API keys, passwords, JWT secrets, or `.env` files to Git.**
+## 🚀 Local Installation
 
----
+### Prerequisites
 
-# 🚀 Installation
+- Node.js 18+ (20+ recommended)
+- npm 9+
+- MongoDB Atlas or local MongoDB
+- Gmail App Password for email functionality
+- Groq API key for AI features
 
-## Prerequisites
-
-Make sure the following are installed:
-
-* Node.js 18+
-* npm 9+
-* MongoDB Atlas or local MongoDB
-* Gmail App Password for email functionality
-* Groq API key for AI features
-
-Node.js 20+ is recommended.
-
----
-
-## 1. Clone the Repository
+### 1. Clone
 
 ```bash
 git clone https://github.com/AliShah1029384756/Fyp-Autismart.git
 cd Fyp-Autismart
 ```
 
----
-
-## 2. Install Backend Dependencies
+### 2. Backend
 
 ```bash
 cd backend
 npm install
-```
-
----
-
-## 3. Install Frontend Dependencies
-
-```bash
-cd ../frontend
-npm install
-```
-
----
-
-# ▶️ Running the Project
-
-Open **two terminals** from the project root.
-
-## Terminal 1 — Backend
-
-```bash
-cd backend
 npm run dev
 ```
 
-Backend will normally run at:
+Backend normally runs at `http://localhost:5000`.
 
-```text
-http://localhost:5000
+### 3. Frontend
+
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-Health check:
+Frontend normally runs at `http://localhost:5173`.
+
+### 4. Verify
+
+Backend health check:
 
 ```text
 http://localhost:5000/health
 ```
 
----
+## 📜 Available Scripts
 
-## Terminal 2 — Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
-Frontend will normally run at:
-
-```text
-http://localhost:5173
-```
-
-If port `5173` is unavailable, Vite may automatically use another port such as:
-
-```text
-http://localhost:5174
-```
-
----
-
-# 🌐 Frontend API Configuration
-
-The frontend uses the following environment variable:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Create:
-
-```text
-frontend/.env
-```
-
-and add:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-If `VITE_API_URL` is not provided, the application defaults to:
-
-```text
-http://localhost:5000/api
-```
-
----
-
-# 📜 Available Scripts
-
-## Backend
-
-From the `backend` directory:
+### Backend
 
 ```bash
 npm run dev
-```
-
-Starts the backend using Nodemon.
-
-```bash
 npm start
-```
-
-Starts the backend using Node.js.
-
-```bash
 npm run create-admin
 ```
 
-Creates the default/admin user using the project's admin creation script.
-
----
-
-## Frontend
-
-From the `frontend` directory:
+### Frontend
 
 ```bash
 npm run dev
-```
-
-Starts the Vite development server.
-
-```bash
 npm run build
-```
-
-Creates a production build.
-
-```bash
 npm run preview
-```
-
-Previews the production build locally.
-
-```bash
 npm run lint
 ```
 
-Runs the frontend linter.
+## 🧪 Quick Start Checklist
 
----
+- [ ] Install Node.js and npm
+- [ ] Install backend dependencies
+- [ ] Install frontend dependencies
+- [ ] Configure MongoDB
+- [ ] Configure environment variables
+- [ ] Configure email credentials if required
+- [ ] Configure Groq API access if required
+- [ ] Start backend
+- [ ] Start frontend
+- [ ] Test registration and OTP verification
+- [ ] Test login and role-based dashboards
+- [ ] Test assessments and child management
+- [ ] Test AI features
 
-# 🧪 Quick Start Checklist
+## 🛡️ Security Notes
 
-Before using the application, make sure:
+For deployment:
 
-* [ ] Node.js is installed
-* [ ] Backend dependencies are installed
-* [ ] Frontend dependencies are installed
-* [ ] MongoDB is configured
-* [ ] `backend/.env` is configured
-* [ ] `VITE_API_URL` is configured if required
-* [ ] Gmail App Password is configured
-* [ ] Groq API key is configured
-* [ ] Backend is running on port `5000`
-* [ ] Frontend is running on Vite
-* [ ] Registration works
-* [ ] OTP verification works
-* [ ] Login works
-* [ ] Role-based dashboards work
-* [ ] Assessments can be accessed
-* [ ] Child management works
-* [ ] AI features are configured
+- Keep secrets outside Git.
+- Use strong, unique JWT secrets.
+- Restrict CORS to trusted frontend origins.
+- Enable HTTPS.
+- Avoid sensitive information in logs.
+- Protect authentication endpoints against abuse and brute-force attempts.
+- Restrict MongoDB network access to trusted sources.
+- Keep dependencies updated.
+- Rotate credentials immediately if they are ever exposed.
 
----
+## 🌐 Deployment
 
-# 🔧 Troubleshooting
+The project has a live frontend deployment for demonstration:
 
-## CORS / Login / Registration Issues
+**[🚀 Launch AutiSmart](https://auti-smart.vercel.app/)**
 
-Make sure the backend CORS configuration allows your frontend origin.
+Some features may require backend services or credentials that are not included in the public repository.
 
-Common local origins:
+## 🎓 Project Context
 
-```text
-http://localhost:5173
-http://127.0.0.1:5173
-http://localhost:5174
-http://127.0.0.1:5174
-```
+**Project:** AutiSmart — Final Year Project  
+**Institution:** FAST-NUCES, Chiniot-Faisalabad Campus  
+**Period:** 2025–2026  
+**Type:** Team-based Final Year Project
 
----
+## 👥 Team
 
-## OTP Email Not Sending
+| Contributor | GitHub | Contribution |
+|---|---|---|
+| **Syed Muhammad Ali Naqvi** | [@AliShah1029384756](https://github.com/AliShah1029384756) | Full-Stack Development & AI Integration |
+| **Shayan Ahmad** | [@shayanahmad756](https://github.com/shayanahmad756) | Core Engine & Backend Development |
+| **Ahmad Kamran** | [@Ahmadkamran73](https://github.com/Ahmadkamran73) | Frontend UI & Systems Logic |
 
-Check:
+## ⚠️ Medical & AI Disclaimer
 
-1. `EMAIL` is correct.
-2. `EMAIL_PASS` contains a Gmail App Password.
-3. Gmail SMTP access is configured correctly.
-4. Backend logs for email configuration warnings.
+AutiSmart is an **academic and assistive technology project**. Its assessments, AI-generated recommendations, and screening-related features are not intended to replace professional medical diagnosis, clinical evaluation, or treatment.
 
-> Use a **Gmail App Password**, not your normal Gmail password.
+Any diagnostic or therapeutic decision should be made with a qualified healthcare or autism-care professional.
 
----
+## 📄 License
 
-## MongoDB Connection Error
-
-Check:
-
-* MongoDB connection string
-* Database username/password
-* MongoDB Atlas network access
-* IP allowlist
-* Internet connection
-* Database cluster status
-
-For development/testing, MongoDB Atlas may require your current IP to be added to the network access list.
-
----
-
-## Login Shows Invalid Credentials
-
-Check that:
-
-* Email is correct
-* Password is correct
-* Account has been verified
-* `isVerified` is set correctly
-* Backend is connected to the correct MongoDB database
-
-For admin access, you can also use:
-
-```bash
-npm run create-admin
-```
-
----
-
-## Frontend Cannot Connect to Backend
-
-Verify:
-
-```text
-Backend → http://localhost:5000
-Frontend → http://localhost:5173
-API → http://localhost:5000/api
-```
-
-Also check the browser's **Network** tab and backend terminal logs.
-
----
-
-# 🛡️ Security Recommendations
-
-For production deployment:
-
-* Never commit `.env` files.
-* Use strong, unique JWT secrets.
-* Rotate compromised credentials immediately.
-* Restrict CORS to trusted frontend domains.
-* Enable HTTPS.
-* Use secure reverse proxy configuration.
-* Add authentication rate limiting.
-* Add brute-force protection.
-* Enforce strong password policies.
-* Avoid exposing sensitive information in logs.
-* Consider implementing refresh tokens.
-* Keep dependencies updated.
-* Properly secure MongoDB network access.
-
----
-
-# ⚠️ Medical & AI Disclaimer
-
-AutiSmart is an **academic and assistive technology project** developed to support autism-related care workflows.
-
-The platform's assessments, AI-generated recommendations, activities, and screening-related features are **not intended to replace professional medical diagnosis, clinical evaluation, or treatment**.
-
-Any diagnostic or therapeutic decision should be made in consultation with a qualified healthcare or autism-care professional.
-
----
-
-# 👥 Authors & Contributors
-
-Developed as a **Final Year Project (FYP)** in fulfillment of the requirements for a **BS Computer Science degree at FAST-NUCES**.
-
-| Contributor                 | GitHub               | Contribution                            |
-| --------------------------- | -------------------- | --------------------------------------- |
-| **Syed Muhammad Ali Naqvi** | `@AliShah1029384756` | Full-Stack Development & AI Integration |
-| **Shayan Ahmad**            | `@shayanahmad756`    | Core Engine & Backend Development       |
-| **Ahmad Kamran**            | `@Ahmadkamran73`     | Frontend UI & Systems Logic             |
-
----
-
-# 📄 License
-
-This project is distributed under the **MIT License**.
-
-See the `LICENSE` file for more information.
-
----
-
-# 🌟 Project Vision
-
-AutiSmart aims to make autism-care workflows more accessible by bringing together:
-
-```text
-       🧠 Assessment
-            │
-            ▼
-      🤖 AI Assistance
-            │
-            ▼
-       👶 Child Care
-            │
-            ▼
-      📊 Progress Tracking
-            │
-            ▼
-       🎮 Activities
-            │
-            ▼
-       👨‍👩‍👧 Caregiver Support
-```
-
-The long-term vision is to develop a reliable, accessible, and intelligent digital ecosystem that helps caregivers and professionals make better-informed decisions while supporting children with autism through personalized and engaging experiences.
+This project is distributed under the **MIT License**. See `LICENSE` for details.
 
 ---
 
 ## ⭐ If You Find This Project Useful
 
-If you find AutiSmart interesting or useful, consider giving the repository a ⭐ on GitHub.
+Consider giving the repository a ⭐ on GitHub.
 
-**Built with ❤️ as a Final Year Project at FAST-NUCES.**
+**Built as a Final Year Project at FAST-NUCES.**
