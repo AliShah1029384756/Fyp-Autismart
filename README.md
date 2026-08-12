@@ -1,18 +1,33 @@
 # 🧩 AutiSmart — AI-Assisted Autism Care & Assessment Platform
 
-> **A full-stack Final Year Project designed to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
+> **A full-stack, team-based Final Year Project developed at FAST-NUCES to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
 
-### 🚀 Live Preview
+### 🚀 Live Deployment
 
 **[Open AutiSmart](https://auti-smart.vercel.app/)**
+
+> **Deployment note:** The project was deployed and used for the team's FYP demonstration/presentation. Because the live environment depends on external services and credentials, some features may become unavailable over time as third-party credentials, quotas, or deployments expire. The public repository does not contain the original secrets; use your own environment configuration for reproduction.
 
 ### 📂 Source Code
 
 **[View this repository](https://github.com/AliShah1029384756/Fyp-Autismart)**
 
-> **Final Team FYP:** This is the final project presented by our team. It is separate from the author's personal experimental AutiSmart work.
+> **Final Team FYP:** This repository represents the final project developed and presented by our FYP team. It is separate from the author's personal experimental AutiSmart work.
 
 ---
+
+## 🎓 Final Year Project Context
+
+**Project:** AutiSmart — Final Year Project  
+**Institution:** FAST-NUCES, Chiniot-Faisalabad Campus  
+**Project period:** 2025–2026  
+**Type:** Team-based Final Year Project  
+**FYP-I (Semester 7):** **A+**  
+**FYP-II (Semester 8):** **A-**
+
+The system was developed collaboratively, deployed for demonstration, and presented by the team as the final-year project across FYP-I and FYP-II.
+
+> The grades above represent the project's academic outcomes. This README intentionally does not publish transcripts, CGPA, or detailed marks.
 
 ## ✨ Key Features
 
@@ -264,20 +279,15 @@ For deployment:
 - Keep dependencies updated.
 - Rotate credentials immediately if they are ever exposed.
 
-## 🌐 Deployment
+## 🌐 Deployment & Reproducibility
 
-The project has a live frontend deployment for demonstration:
+The project has a live frontend deployment that was used for demonstration/presentation:
 
 **[🚀 Launch AutiSmart](https://auti-smart.vercel.app/)**
 
-Some features may require backend services or credentials that are not included in the public repository.
+The live deployment depends on external infrastructure and service credentials. Those original credentials are intentionally **not** included in this repository. If the hosted environment is no longer fully operational, reproduce the application locally using your own MongoDB, email, Groq, JWT, and deployment configuration.
 
-## 🎓 Project Context
-
-**Project:** AutiSmart — Final Year Project  
-**Institution:** FAST-NUCES, Chiniot-Faisalabad Campus  
-**Period:** 2025–2026  
-**Type:** Team-based Final Year Project
+This distinction keeps the repository reproducible without exposing or depending on the team's original secrets.
 
 ## 👥 Team
 
@@ -303,4 +313,4 @@ This project is distributed under the **MIT License**. See `LICENSE` for details
 
 Consider giving the repository a ⭐ on GitHub.
 
-**Built as a Final Year Project at FAST-NUCES.**
+**Built and presented as a Final Year Project at FAST-NUCES.**
