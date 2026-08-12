@@ -110,7 +110,6 @@ process.on('unhandledRejection', (err) => {
   console.error('Server will continue running...');
 });
 
-// Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
   console.error('❌ Uncaught Exception:', err);
   console.error('Server will continue running...');
