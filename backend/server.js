@@ -35,14 +35,14 @@ const connectDB = async () => {
   try {
     console.log('Attempting to connect to MongoDB...');
     console.log('MongoDB URI:', process.env.MONGO_URI ? 'Set' : 'Not Set');
-    
+
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+      serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
-      family: 4 // Use IPv4, skip trying IPv6
+      family: 4
     });
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    
+
     // Verify email configuration (non-blocking)
     console.log('Verifying email config in background...');
     verifyEmailConfig().then(() => {
@@ -52,14 +52,11 @@ const connectDB = async () => {
     });
   } catch (error) {
     console.error(`❌ MongoDB Connection Error: ${error.message}`);
-    console.error('Full error:', error);
-    console.error('Stack trace:', error.stack);
     console.error('Please check:');
     console.error('1. Your internet connection');
-    console.error('2. MongoDB Atlas IP whitelist (add 0.0.0.0/0 for all IPs)');
+    console.error('2. MongoDB Atlas network access configuration');
     console.error('3. MongoDB credentials in .env file');
-    console.error('MONGO_URI:', process.env.MONGO_URI);
-    // Don't exit immediately, let the server run for debugging
+    // Do not log the MongoDB URI or other credentials.
     console.error('⚠️ Server will continue running without database connection for debugging...');
   }
 };
