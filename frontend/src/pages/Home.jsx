@@ -118,21 +118,21 @@ const Home = () => {
 
   return (
     <div>
-      <div className="bg-dark text-white py-2 px-3">
+      {/* Clean brand-colored demo strip */}
+      <div className="demo-banner py-2 px-3">
         <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 small">
-          <div>
-            <strong className="me-2">Frontend tour</strong>
-            <span className="opacity-75">Mock data for browsing only — not a live backend.</span>
+          <div className="d-flex flex-wrap align-items-center gap-2">
+            <span className="demo-pill">Demo</span>
+            <span>Frontend tour with mock data — UI preview only.</span>
           </div>
           <div className="d-flex flex-wrap gap-2 align-items-center">
-            <span className="opacity-75">Original:</span>
             <a
               href={ORIGINAL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-sm btn-outline-light"
             >
-              auti-smart.vercel.app
+              Original site
             </a>
             {isDemoMode && (
               <button
@@ -164,25 +164,16 @@ const Home = () => {
             </span>
           </p>
 
-          {!isAuthenticated || isDemoMode ? (
-            <div className="d-flex gap-2 justify-content-center flex-wrap slide-up delay-2 mb-3">
-              <button type="button" className="btn btn-light btn-lg btn-hover-lift" onClick={() => beginTour('guest')}>
-                Tour as Guest
-              </button>
-              <button type="button" className="btn btn-outline-light btn-lg btn-hover-lift" onClick={() => beginTour('caregiver')}>
-                Tour as Caregiver
-              </button>
-              <button type="button" className="btn btn-outline-light btn-lg btn-hover-lift" onClick={() => beginTour('expert')}>
-                Tour as Expert
-              </button>
-            </div>
-          ) : null}
-
-          <div className="d-flex gap-3 justify-content-center flex-wrap slide-up delay-2">
+          <div className="d-flex gap-3 justify-content-center flex-wrap slide-up delay-2 mb-3">
             {!isAuthenticated ? (
-              <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
-                Explore Therapy Games
-              </Link>
+              <>
+                <Link to="/games" className="btn btn-light btn-lg btn-hover-lift">
+                  Get Started
+                </Link>
+                <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
+                  Explore Therapy Games
+                </Link>
+              </>
             ) : (
               <>
                 <Link to="/dashboard" className="btn btn-light btn-lg btn-hover-lift">
@@ -191,12 +182,29 @@ const Home = () => {
                 <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
                   Explore Therapy Games
                 </Link>
-                <Link to="/demo-child" className="btn btn-outline-light btn-lg btn-hover-lift">
-                  Demo child & assessments
-                </Link>
               </>
             )}
           </div>
+
+          {/* Compact tour row — secondary, brand-aligned */}
+          {(!isAuthenticated || isDemoMode) && (
+            <div className="tour-actions d-flex gap-2 justify-content-center flex-wrap slide-up delay-2 mt-2">
+              <button type="button" className="btn btn-sm btn-light" onClick={() => beginTour('guest')}>
+                Tour as Guest
+              </button>
+              <button type="button" className="btn btn-sm btn-outline-light" onClick={() => beginTour('caregiver')}>
+                Tour as Caregiver
+              </button>
+              <button type="button" className="btn btn-sm btn-outline-light" onClick={() => beginTour('expert')}>
+                Tour as Expert
+              </button>
+              {isDemoMode && (
+                <Link to="/demo-child" className="btn btn-sm btn-outline-light">
+                  Demo child
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -310,13 +318,18 @@ const Home = () => {
           <div className="container">
             <div className="card text-white cta-card" style={{ backgroundColor: '#61C3B4' }}>
               <div className="card-body text-center p-5">
-                <h2 className="mb-3 fade-in-up">Explore the frontend tour</h2>
+                <h2 className="mb-3 fade-in-up">Ready to Get Started?</h2>
                 <p className="lead mb-4 fade-in-up" style={{ animationDelay: '0.2s' }}>
-                  Use Guest, Caregiver, or Expert tour above to browse UI with mock data.
+                  Browse the frontend tour, or open the original deployment.
                 </p>
-                <a href={ORIGINAL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-light btn-lg btn-hover-lift">
-                  Open original deployment
-                </a>
+                <div className="d-flex gap-2 justify-content-center flex-wrap">
+                  <button type="button" className="btn btn-light btn-lg btn-hover-lift" onClick={() => beginTour('guest')}>
+                    Start guest tour
+                  </button>
+                  <a href={ORIGINAL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light btn-lg btn-hover-lift">
+                    Open original site
+                  </a>
+                </div>
               </div>
             </div>
           </div>
