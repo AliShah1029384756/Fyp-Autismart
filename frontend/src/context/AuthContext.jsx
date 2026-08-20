@@ -1,7 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authService, childService } from '../services';
+import { DEMO_CHILD, demoUserForRole } from '../data/demoData';
 
 const AuthContext = createContext(null);
+const DEMO_KEY = 'autismart_demo_mode';
+const DEMO_ROLE_KEY = 'autismart_demo_role';
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -16,21 +19,20 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [sessionExpired, setSessionExpired] = useState(false);
   const [preloadedData, setPreloadedData] = useState(null);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
-  // Auto logout after 3 minutes of inactivity
+  // Auto logout after 3 minutes of inactivity (skip in demo mode)
   useEffect(() => {
     let logoutTimer;
     let activityTimer;
 
-    const SESSION_TIMEOUT = 3 * 60 * 1000; // 3 minutes in milliseconds
+    const SESSION_TIMEOUT = 3 * 60 * 1000;
 
     const resetTimer = () => {
-      // Clear existing timers
       if (logoutTimer) clearTimeout(logoutTimer);
       if (activityTimer) clearTimeout(activityTimer);
 
-      // Set new logout timer
-      if (user) {
+      if (user && !isDemoMode) {
         logoutTimer = setTimeout(() => {
           logout();
           setSessionExpired(true);
@@ -42,27 +44,20 @@ export const AuthProvider = ({ children }) => {
     };
 
     const handleActivity = () => {
-      // Clear activity timer to prevent too many resets
       if (activityTimer) clearTimeout(activityTimer);
-      
-      // Debounce activity events
       activityTimer = setTimeout(() => {
         resetTimer();
       }, 1000);
     };
 
-    // Only set up listeners if user is logged in
-    if (user) {
+    if (user && !isDemoMode) {
       resetTimer();
-
-      // Listen for user activity
       window.addEventListener('mousedown', handleActivity);
       window.addEventListener('keydown', handleActivity);
       window.addEventListener('scroll', handleActivity);
       window.addEventListener('touchstart', handleActivity);
     }
 
-    // Cleanup
     return () => {
       if (logoutTimer) clearTimeout(logoutTimer);
       if (activityTimer) clearTimeout(activityTimer);
@@ -71,31 +66,40 @@ export const AuthProvider = ({ children }) => {
       window.removeEventListener('scroll', handleActivity);
       window.removeEventListener('touchstart', handleActivity);
     };
-  }, [user]);
+  }, [user, isDemoMode]);
 
   useEffect(() => {
-    // Check if user is logged in on mount
+    const demoFlag = localStorage.getItem(DEMO_KEY) === '1';
+    const demoRole = localStorage.getItem(DEMO_ROLE_KEY);
+
+    if (demoFlag && demoRole) {
+      const demoUser = demoUserForRole(demoRole);
+      setUser(demoUser);
+      setIsDemoMode(true);
+      setPreloadedData({
+        children: demoRole === 'caregiver' || demoRole === 'expert' ? [DEMO_CHILD] : [],
+      });
+      setLoading(false);
+      return;
+    }
+
     const currentUser = authService.getCurrentUser();
     if (currentUser) {
       setUser(currentUser);
-      // Preload essential data for existing session
       preloadUserData();
     } else {
       setLoading(false);
     }
   }, []);
 
-  // Preload essential data after login
   const preloadUserData = async () => {
     try {
-      // Fetch all essential data in parallel
       const [childrenResponse] = await Promise.all([
-        childService.getChildren().catch(() => ({ data: [] }))
-        // Add more API calls here as needed (activities, reports, etc.)
+        childService.getChildren().catch(() => ({ data: [] })),
       ]);
-      
+
       setPreloadedData({
-        children: childrenResponse.data || []
+        children: childrenResponse.data || [],
       });
     } catch (err) {
       console.error('Error preloading data:', err);
@@ -104,24 +108,43 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const startDemoTour = (role = 'guest') => {
+    const allowed = ['guest', 'caregiver', 'expert'];
+    const safeRole = allowed.includes(role) ? role : 'guest';
+    const demoUser = demoUserForRole(safeRole);
+
+    localStorage.setItem(DEMO_KEY, '1');
+    localStorage.setItem(DEMO_ROLE_KEY, safeRole);
+    // Clear real auth tokens so API is not used by mistake
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    setIsDemoMode(true);
+    setUser(demoUser);
+    setPreloadedData({
+      children: safeRole === 'caregiver' || safeRole === 'expert' ? [DEMO_CHILD] : [],
+    });
+    setLoading(false);
+
+    return demoUser;
+  };
+
   const login = async (credentials) => {
-    // Support both old signature (email, password) and new signature (credentials object)
     let loginData;
     if (typeof credentials === 'string') {
-      // Old signature: login(email, password)
       const password = arguments[1];
       loginData = { email: credentials, password };
     } else {
-      // New signature: login({ email/phoneNumber, password })
       loginData = credentials;
     }
-    
+
+    localStorage.removeItem(DEMO_KEY);
+    localStorage.removeItem(DEMO_ROLE_KEY);
+    setIsDemoMode(false);
+
     const response = await authService.login(loginData);
     setUser(response.data.user);
-    
-    // Preload user data immediately after login
     await preloadUserData();
-    
     return response;
   };
 
@@ -131,30 +154,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   const verifyOtp = async (verifyData) => {
-    // Support both old signature (email, otp) and new signature (verifyData object)
     let otpData;
     if (typeof verifyData === 'string') {
-      // Old signature: verifyOtp(email, otp)
       const otp = arguments[1];
       otpData = { email: verifyData, otp };
     } else {
-      // New signature: verifyOtp({ email/phoneNumber, otp })
       otpData = verifyData;
     }
-    
+
     const response = await authService.verifyOtp(otpData);
     setUser(response.data.user);
-    
-    // Preload user data immediately after OTP verification
     await preloadUserData();
-    
     return response;
   };
 
   const logout = () => {
     authService.logout();
+    localStorage.removeItem(DEMO_KEY);
+    localStorage.removeItem(DEMO_ROLE_KEY);
     setUser(null);
     setPreloadedData(null);
+    setIsDemoMode(false);
   };
 
   const value = {
@@ -164,6 +184,8 @@ export const AuthProvider = ({ children }) => {
     register,
     verifyOtp,
     logout,
+    startDemoTour,
+    isDemoMode,
     isAuthenticated: !!user,
     sessionExpired,
     setSessionExpired,
