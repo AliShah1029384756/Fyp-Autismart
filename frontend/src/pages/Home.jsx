@@ -23,12 +23,12 @@ const Home = () => {
   const [typingSpeed, setTypingSpeed] = useState(150);
 
   const dynamicPhrases = [
-    "interactive games",
-    "smart assessments",
-    "personalized therapy",
-    "progress tracking",
-    "expert guidance",
-    "educational resources"
+    'interactive games',
+    'smart assessments',
+    'personalized therapy',
+    'progress tracking',
+    'expert guidance',
+    'educational resources'
   ];
 
   const beginTour = (role) => {
@@ -68,7 +68,7 @@ const Home = () => {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting && !statsVisible) {
             setStatsVisible(true);
             const duration = 2000;
@@ -114,6 +114,8 @@ const Home = () => {
     return () => observer.disconnect();
   }, [statsVisible]);
 
+  const usersLabel = counters.users > 0 ? (counters.users / 1000).toFixed(0) + 'K+' : '0';
+
   return (
     <div>
       <div className="bg-dark text-white py-2 px-3">
@@ -148,7 +150,10 @@ const Home = () => {
         </div>
       </div>
 
-      <section className={`hero-section text-center ${isVisible ? 'fade-in' : ''}`} style={{ borderRadius: '0px' }}>
+      <section
+        className={'hero-section text-center' + (isVisible ? ' fade-in' : '')}
+        style={{ borderRadius: '0px' }}
+      >
         <div className="container">
           <h1 className="display-4 fw-bold mb-4 slide-up">Welcome to AutiSmart</h1>
           <p className="lead mb-4 slide-up delay-1" style={{ minHeight: '60px' }}>
@@ -274,33 +279,25 @@ const Home = () => {
           <div className="row g-0 text-center">
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.1s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
-                  {counters.users > 0 ? `${(counters.users / 1000).toFixed(0)}K+` : '0'}
-                </div>
+                <div className={'stat-value-new' + (statsVisible ? ' animate-count' : '')}>{usersLabel}</div>
                 <div className="stat-label-new">ACTIVE USERS</div>
               </div>
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.2s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
-                  {counters.therapists}+
-                </div>
+                <div className={'stat-value-new' + (statsVisible ? ' animate-count' : '')}>{counters.therapists}+</div>
                 <div className="stat-label-new">EXPERT THERAPISTS</div>
               </div>
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.3s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
-                  {counters.games}+
-                </div>
+                <div className={'stat-value-new' + (statsVisible ? ' animate-count' : '')}>{counters.games}+</div>
                 <div className="stat-label-new">INTERACTIVE GAMES</div>
               </div>
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.4s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
-                  {counters.satisfaction}%
-                </div>
+                <div className={'stat-value-new' + (statsVisible ? ' animate-count' : '')}>{counters.satisfaction}%</div>
                 <div className="stat-label-new">SATISFACTION RATE</div>
               </div>
             </div>
