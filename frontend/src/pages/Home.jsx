@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import '../styles/homeStats.css';
 
+const ORIGINAL_URL = 'https://auti-smart.vercel.app/';
+
 const Home = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isDemoMode, startDemoTour, logout } = useAuth();
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
   const [counters, setCounters] = useState({
@@ -14,7 +17,6 @@ const Home = () => {
     satisfaction: 0
   });
 
-  // Dynamic text animation states
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -29,27 +31,29 @@ const Home = () => {
     "educational resources"
   ];
 
-  // Typing animation effect
+  const beginTour = (role) => {
+    startDemoTour(role);
+    if (role === 'caregiver') navigate('/caregiver-dashboard');
+    else if (role === 'expert') navigate('/expert-dashboard');
+    else navigate('/games');
+  };
+
   useEffect(() => {
     const currentPhrase = dynamicPhrases[currentPhraseIndex];
-    
+
     const typingTimeout = setTimeout(() => {
       if (!isDeleting) {
-        // Typing forward
         if (displayText.length < currentPhrase.length) {
           setDisplayText(currentPhrase.substring(0, displayText.length + 1));
           setTypingSpeed(150);
         } else {
-          // Pause before deleting
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
-        // Deleting
         if (displayText.length > 0) {
           setDisplayText(currentPhrase.substring(0, displayText.length - 1));
           setTypingSpeed(75);
         } else {
-          // Move to next phrase
           setIsDeleting(false);
           setCurrentPhraseIndex((prev) => (prev + 1) % dynamicPhrases.length);
         }
@@ -62,7 +66,6 @@ const Home = () => {
   useEffect(() => {
     setIsVisible(true);
 
-    // Intersection Observer for stats animation
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -113,8 +116,41 @@ const Home = () => {
 
   return (
     <div>
+      {/* Demo + original link */}
+      <div className="bg-dark text-white py-2 px-3">
+        <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 small">
+          <div>
+            <strong className="me-2">Frontend tour</strong>
+            <span className="opacity-75">Mock data for browsing only — not a live backend.</span>
+          </div>
+          <div className="d-flex flex-wrap gap-2 align-items-center">
+            <span className="opacity-75">Original deployment:</span>
+            <a
+              href={ORIGINAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-sm btn-outline-light"
+            >
+              {ORIGINAL_URL.replace('https://', '')}
+            </a>
+            {isDemoMode && (
+              <button
+                type="button"
+                className="btn btn-sm btn-warning"
+                onClick={() => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                Exit tour
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className={`hero-section text-center ${isVisible ? 'fade-in' : ''}`} style={{borderRadius: '0px' }}>
+      <section className={`hero-section text-center ${isVisible ? 'fade-in' : ''}`} style={{ borderRadius: '0px' }}>
         <div className="container">
           <h1 className="display-4 fw-bold mb-4 slide-up">Welcome to AutiSmart</h1>
           <p className="lead mb-4 slide-up delay-1" style={{ minHeight: '60px' }}>
@@ -124,12 +160,24 @@ const Home = () => {
               <span className="typing-cursor">|</span>
             </span>
           </p>
+
+          {!isAuthenticated || isDemoMode ? (
+            <div className="d-flex gap-2 justify-content-center flex-wrap slide-up delay-2 mb-3">
+              <button type="button" className="btn btn-light btn-lg btn-hover-lift" onClick={() => beginTour('guest')}>
+                Tour as Guest
+              </button>
+              <button type="button" className="btn btn-outline-light btn-lg btn-hover-lift" onClick={() => beginTour('caregiver')}>
+                Tour as Caregiver
+              </button>
+              <button type="button" className="btn btn-outline-light btn-lg btn-hover-lift" onClick={() => beginTour('expert')}>
+                Tour as Expert
+              </button>
+            </div>
+          ) : null}
+
           <div className="d-flex gap-3 justify-content-center flex-wrap slide-up delay-2">
             {!isAuthenticated ? (
               <>
-                <Link to="/register" className="btn btn-light btn-lg btn-hover-lift">
-                  Get Started
-                </Link>
                 <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
                   Explore Therapy Games
                 </Link>
@@ -257,7 +305,7 @@ const Home = () => {
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.3s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''}`}>
+                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
                   {counters.games}+
                 </div>
                 <div className="stat-label-new">INTERACTIVE GAMES</div>
@@ -265,7 +313,7 @@ const Home = () => {
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.4s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''}`}>
+                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
                   {counters.satisfaction}%
                 </div>
                 <div className="stat-label-new">SATISFACTION RATE</div>
@@ -275,19 +323,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       {!isAuthenticated && (
         <section className="section-spacing">
           <div className="container">
             <div className="card text-white cta-card" style={{ backgroundColor: '#61C3B4' }}>
               <div className="card-body text-center p-5">
-                <h2 className="mb-3 fade-in-up">Ready to Get Started?</h2>
+                <h2 className="mb-3 fade-in-up">Explore the frontend tour</h2>
                 <p className="lead mb-4 fade-in-up" style={{ animationDelay: '0.2s' }}>
-                  Join thousands of families using AutiSmart to support their children's development
+                  Use Guest, Caregiver, or Expert tour above to browse UI with mock data.
                 </p>
-                <Link to="/register" className="btn btn-light btn-lg btn-hover-lift pulse-on-hover" style={{ animationDelay: '0.4s' }}>
-                  Create Free Account
-                </Link>
+                <a
+                  href={ORIGINAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-light btn-lg btn-hover-lift"
+                >
+                  Open original deployment
+                </a>
               </div>
             </div>
           </div>
