@@ -12,7 +12,6 @@ import AdminDashboard from './Admin/AdminDashboard';
 import CaregiverDashboard from './CaregiverDashboard';
 import ExpertDashboard from './ExpertDashboard';
 
-// Import new pages
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Home from '../pages/Home';
@@ -41,8 +40,8 @@ import Notifications from '../pages/Notifications';
 import Help from '../pages/Help';
 import ChildManagement from '../pages/ChildManagement';
 import ChildReports from '../pages/ChildReports';
+import DemoChildOverview from '../pages/DemoChildOverview';
 
-// Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
@@ -59,9 +58,8 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
-// Public Route Component (redirect to dashboard if already logged in)
 const PublicRoute = ({ children }) => {
-  const { isAuthenticated, loading, user } = useAuth();
+  const { isAuthenticated, loading, user, isDemoMode } = useAuth();
 
   if (loading) {
     return (
@@ -73,8 +71,7 @@ const PublicRoute = ({ children }) => {
     );
   }
 
-  if (isAuthenticated) {
-    // Redirect admin users to admin panel
+  if (isAuthenticated && !isDemoMode) {
     return user?.role === 'admin' ? <Navigate to="/admin" /> : <Navigate to="/dashboard" />;
   }
 
@@ -88,244 +85,50 @@ function AppContent() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
-        <Route
-          path="/forgot-password"
-          element={
-            <PublicRoute>
-              <ForgotPassword />
-            </PublicRoute>
-          }
-        />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        
-        {/* Public Pages */}
-        <Route path="/games" element={<Games />} />
-        <Route path="/games/memory-match" element={<MemoryMatchGame />} />
-        <Route path="/games/sound-matching" element={<SoundMatchingGame />} />
-        <Route path="/games/color-matching" element={<ColorMatchingGame />} />
-        <Route path="/games/emotion-explorer" element={<EmotionExplorerGame />} />
-        <Route path="/games/communication-builder" element={<CommunicationBuilderGame />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/about" element={<About />} />
-        
-        {/* Protected User Pages */}
-        <Route
-          path="/assessment"
-          element={
-            <ProtectedRoute>
-              <Assessment />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/caregiver-dashboard"
-          element={
-            <ProtectedRoute>
-              <CaregiverDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/expert-dashboard"
-          element={
-            <ProtectedRoute>
-              <ExpertDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/user-dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/tracker"
-          element={
-            <ProtectedRoute>
-              <Tracker />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/therapy"
-          element={
-            <ProtectedRoute>
-              <Therapy />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/communication"
-          element={
-            <ProtectedRoute>
-              <Communication />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/sessions"
-          element={
-            <ProtectedRoute>
-              <Sessions />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/change-password"
-          element={
-            <ProtectedRoute>
-              <ChangePassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <Notifications />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/help"
-          element={
-            <ProtectedRoute>
-              <Help />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/child-management"
-          element={
-            <ProtectedRoute>
-              <ChildManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/child-reports"
-          element={
-            <ProtectedRoute>
-              <ChildReports />
-            </ProtectedRoute>
-          }
-        />
-        
-        {/* Admin Pages */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin-users"
-          element={
-            <ProtectedRoute>
-              <AdminUsers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/assessment-management"
-          element={
-            <ProtectedRoute>
-              <AssessmentManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <ProtectedRoute>
-              <AdminUsers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/assessments"
-          element={
-            <ProtectedRoute>
-              <AssessmentManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/reports"
-          element={
-            <ProtectedRoute>
-              <Reports />
-            </ProtectedRoute>
-          }
-        />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Child Management Routes */}
-        <Route
-          path="/children"
-          element={
-            <ProtectedRoute>
-              <ChildManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/child-reports"
-          element={
-            <ProtectedRoute>
-              <ChildReports />
-            </ProtectedRoute>
-          }
-        />
-        
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/memory-match" element={<MemoryMatchGame />} />
+          <Route path="/games/sound-matching" element={<SoundMatchingGame />} />
+          <Route path="/games/color-matching" element={<ColorMatchingGame />} />
+          <Route path="/games/emotion-explorer" element={<EmotionExplorerGame />} />
+          <Route path="/games/communication-builder" element={<CommunicationBuilderGame />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/demo-child" element={<DemoChildOverview />} />
+
+          <Route path="/assessment" element={<ProtectedRoute><Assessment /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/caregiver-dashboard" element={<ProtectedRoute><CaregiverDashboard /></ProtectedRoute>} />
+          <Route path="/expert-dashboard" element={<ProtectedRoute><ExpertDashboard /></ProtectedRoute>} />
+          <Route path="/user-dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
+          <Route path="/therapy" element={<ProtectedRoute><Therapy /></ProtectedRoute>} />
+          <Route path="/communication" element={<ProtectedRoute><Communication /></ProtectedRoute>} />
+          <Route path="/sessions" element={<ProtectedRoute><Sessions /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+          <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+          <Route path="/child-management" element={<ProtectedRoute><ChildManagement /></ProtectedRoute>} />
+          <Route path="/child-reports" element={<ProtectedRoute><ChildReports /></ProtectedRoute>} />
+          <Route path="/children" element={<ProtectedRoute><ChildManagement /></ProtectedRoute>} />
+
+          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/admin-users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+          <Route path="/assessment-management" element={<ProtectedRoute><AssessmentManagement /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+          <Route path="/admin/assessments" element={<ProtectedRoute><AssessmentManagement /></ProtectedRoute>} />
+          <Route path="/admin/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </main>
       <Footer />
     </>
