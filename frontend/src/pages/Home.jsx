@@ -33,7 +33,7 @@ const Home = () => {
 
   const beginTour = (role) => {
     startDemoTour(role);
-    if (role === 'caregiver') navigate('/caregiver-dashboard');
+    if (role === 'caregiver') navigate('/demo-child');
     else if (role === 'expert') navigate('/expert-dashboard');
     else navigate('/games');
   };
@@ -116,7 +116,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* Demo + original link */}
       <div className="bg-dark text-white py-2 px-3">
         <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 small">
           <div>
@@ -124,14 +123,14 @@ const Home = () => {
             <span className="opacity-75">Mock data for browsing only — not a live backend.</span>
           </div>
           <div className="d-flex flex-wrap gap-2 align-items-center">
-            <span className="opacity-75">Original deployment:</span>
+            <span className="opacity-75">Original:</span>
             <a
               href={ORIGINAL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-sm btn-outline-light"
             >
-              {ORIGINAL_URL.replace('https://', '')}
+              auti-smart.vercel.app
             </a>
             {isDemoMode && (
               <button
@@ -149,7 +148,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
       <section className={`hero-section text-center ${isVisible ? 'fade-in' : ''}`} style={{ borderRadius: '0px' }}>
         <div className="container">
           <h1 className="display-4 fw-bold mb-4 slide-up">Welcome to AutiSmart</h1>
@@ -177,11 +175,9 @@ const Home = () => {
 
           <div className="d-flex gap-3 justify-content-center flex-wrap slide-up delay-2">
             {!isAuthenticated ? (
-              <>
-                <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
-                  Explore Therapy Games
-                </Link>
-              </>
+              <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
+                Explore Therapy Games
+              </Link>
             ) : (
               <>
                 <Link to="/dashboard" className="btn btn-light btn-lg btn-hover-lift">
@@ -190,13 +186,15 @@ const Home = () => {
                 <Link to="/games" className="btn btn-outline-light btn-lg btn-hover-lift">
                   Explore Therapy Games
                 </Link>
+                <Link to="/demo-child" className="btn btn-outline-light btn-lg btn-hover-lift">
+                  Demo child & assessments
+                </Link>
               </>
             )}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="section-spacing">
         <div className="container">
           <h2 className="text-center mb-5 fade-in-up">Our Features</h2>
@@ -208,9 +206,7 @@ const Home = () => {
                     <i className="bi bi-controller"></i>
                   </div>
                   <h5 className="card-title">Interactive Therapy Games</h5>
-                  <p className="card-text">
-                    Engaging educational therapy games designed to improve cognitive and motor skills
-                  </p>
+                  <p className="card-text">Engaging educational therapy games designed to improve cognitive and motor skills</p>
                 </div>
               </div>
             </div>
@@ -221,9 +217,7 @@ const Home = () => {
                     <i className="bi bi-clipboard-check"></i>
                   </div>
                   <h5 className="card-title">Smart Assessments</h5>
-                  <p className="card-text">
-                    Comprehensive assessments to track development and identify needs
-                  </p>
+                  <p className="card-text">Comprehensive assessments to track development and identify needs</p>
                 </div>
               </div>
             </div>
@@ -234,9 +228,7 @@ const Home = () => {
                     <i className="bi bi-heart-pulse"></i>
                   </div>
                   <h5 className="card-title">Personalized Discussion</h5>
-                  <p className="card-text">
-                    Tailored discussion recommendations based on individual progress
-                  </p>
+                  <p className="card-text">Tailored discussion recommendations based on individual progress</p>
                 </div>
               </div>
             </div>
@@ -247,9 +239,7 @@ const Home = () => {
                     <i className="bi bi-graph-up"></i>
                   </div>
                   <h5 className="card-title">Progress Tracking</h5>
-                  <p className="card-text">
-                    Monitor symptoms and development with visual dashboards
-                  </p>
+                  <p className="card-text">Monitor symptoms and development with visual dashboards</p>
                 </div>
               </div>
             </div>
@@ -260,9 +250,7 @@ const Home = () => {
                     <i className="bi bi-chat-dots"></i>
                   </div>
                   <h5 className="card-title">Expert Communication</h5>
-                  <p className="card-text">
-                    Connect with autism specialists and therapists for guidance
-                  </p>
+                  <p className="card-text">Connect with autism specialists and therapists for guidance</p>
                 </div>
               </div>
             </div>
@@ -273,9 +261,7 @@ const Home = () => {
                     <i className="bi bi-book"></i>
                   </div>
                   <h5 className="card-title">Educational Resources</h5>
-                  <p className="card-text">
-                    Access a library of articles, videos, and learning materials
-                  </p>
+                  <p className="card-text">Access a library of articles, videos, and learning materials</p>
                 </div>
               </div>
             </div>
@@ -283,13 +269,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="stats-section-new">
         <div className="container">
           <div className="row g-0 text-center">
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.1s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''}`}>
+                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
                   {counters.users > 0 ? `${(counters.users / 1000).toFixed(0)}K+` : '0'}
                 </div>
                 <div className="stat-label-new">ACTIVE USERS</div>
@@ -297,7 +282,7 @@ const Home = () => {
             </div>
             <div className="col-md-3 col-sm-6 stat-item-new" style={{ animationDelay: '0.2s' }}>
               <div className="stat-content-new">
-                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''}`}>
+                <div className={`stat-value-new ${statsVisible ? 'animate-count' : ''`}>
                   {counters.therapists}+
                 </div>
                 <div className="stat-label-new">EXPERT THERAPISTS</div>
@@ -332,12 +317,7 @@ const Home = () => {
                 <p className="lead mb-4 fade-in-up" style={{ animationDelay: '0.2s' }}>
                   Use Guest, Caregiver, or Expert tour above to browse UI with mock data.
                 </p>
-                <a
-                  href={ORIGINAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-light btn-lg btn-hover-lift"
-                >
+                <a href={ORIGINAL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-light btn-lg btn-hover-lift">
                   Open original deployment
                 </a>
               </div>
