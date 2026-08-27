@@ -2,9 +2,9 @@
 
 > **A full-stack, team-based Final Year Project developed at FAST-NUCES to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
 
-### Live Demo
+### Live Demo & Case Study
 
-**[Open AutiSmart (Frontend)](https://auti-smart-rosy.vercel.app)**
+**[Open AutiSmart (Frontend)](https://auti-smart-rosy.vercel.app)** · **[Portfolio Case Study](https://alishah1029384756.github.io/AliShah1029384756/projects/autismart.html)**
 
 > **Deployment note:** The project was deployed and used for the team's FYP demonstration/presentation. Because the live environment depends on external services and credentials, some features may become unavailable over time or run with mock data. The public repository does not contain original secrets; use your own environment configuration for full reproduction.
 
@@ -39,15 +39,15 @@ The system was developed collaboratively, deployed for demonstration, and presen
 
 This is a **team project**. Individual ownership of every line of code is not claimed.
 
-## Key Features
+## Key Features (Verified)
 
-- Role-based authentication for Caregivers, Experts, and Administrators
+- Role-based authentication for Caregivers, Experts, and Administrators (JWT + email OTP)
 - Child profiles and caregiver management
-- Structured autism assessment workflows and assessment history
+- Structured autism assessment workflows and assessment history (six behavioural categories)
 - Progress tracking, statistics, and reports
-- AI-assisted caregiver guidance and recommendations using the Groq API
-- Email OTP verification and account workflows
-- Therapy-oriented activities, games, and emotion-based exercises
+- AI-assisted quiz generation and Emotion Explorer content via the Groq API (Llama 3.3 70B)
+- Rule-based therapy-game recommendations derived from assessment category scores
+- Therapy-oriented activities and emotion-based exercises
 - Dashboards and data visualisation
 - Administrative user and assessment management
 
@@ -56,7 +56,7 @@ This is a **team project**. Individual ownership of every line of code is not cl
 ## Technology Stack
 
 ### Frontend
-- React 19 · Vite 7 · React Router · Axios · Bootstrap · Bootstrap Icons
+- React 19 · Vite 7 · React Router · Axios · Bootstrap · Bootstrap Icons · Chart.js
 
 ### Backend
 - Node.js · Express.js · MongoDB · Mongoose · JWT Authentication · Nodemailer · Groq SDK / API
@@ -192,6 +192,14 @@ Backend: `http://localhost:5000` · Frontend: `http://localhost:5173` · Health:
 - Protect authentication endpoints against abuse
 - Restrict MongoDB network access
 - Rotate credentials immediately if ever exposed
+
+## Limitations (Honest Scope)
+
+- Academic team Final Year Project — not a production clinical system
+- No clinical validation or regulatory clearance
+- Live demo depends on external services (MongoDB, email, Groq); may run limited/mock without credentials
+- Public deployment is frontend-only; full stack requires local or private backend
+- AI-generated content quality depends on prompts and model behaviour; human review remains advisable
 
 ## Medical & AI Disclaimer
 
