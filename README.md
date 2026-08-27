@@ -1,22 +1,22 @@
-# 🧩 AutiSmart — AI-Assisted Autism Care & Assessment Platform
+# AutiSmart — AI-Assisted Autism Care & Assessment Platform
 
 > **A full-stack, team-based Final Year Project developed at FAST-NUCES to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
 
-### 🚀 Live Deployment
+### Live Demo
 
-**[Open AutiSmart](https://auti-smart.vercel.app/)**
+**[Open AutiSmart (Frontend)](https://auti-smart-rosy.vercel.app)**
 
-> **Deployment note:** The project was deployed and used for the team's FYP demonstration/presentation. Because the live environment depends on external services and credentials, some features may become unavailable over time as third-party credentials, quotas, or deployments expire. The public repository does not contain the original secrets; use your own environment configuration for reproduction.
+> **Deployment note:** The project was deployed and used for the team's FYP demonstration/presentation. Because the live environment depends on external services and credentials, some features may become unavailable over time or run with mock data. The public repository does not contain original secrets; use your own environment configuration for full reproduction.
 
-### 📂 Source Code
+### Source Code
 
 **[View this repository](https://github.com/AliShah1029384756/Fyp-Autismart)**
 
-> **Final Team FYP:** This repository represents the final project developed and presented by our FYP team. It is separate from the author's personal experimental AutiSmart work.
+> **Final Team FYP:** This repository represents the final project developed and presented by our FYP team. It is separate from any personal experimental AutiSmart work.
 
 ---
 
-## 🎓 Final Year Project Context
+## Final Year Project Context
 
 **Project:** AutiSmart — Final Year Project  
 **Institution:** FAST-NUCES, Chiniot-Faisalabad Campus  
@@ -29,42 +29,39 @@ The system was developed collaboratively, deployed for demonstration, and presen
 
 > The grades above represent the project's academic outcomes. This README intentionally does not publish transcripts, CGPA, or detailed marks.
 
-## ✨ Key Features
+## Team vs My Contribution
 
-- 🔐 Role-based authentication for **Caregivers, Experts, and Administrators**
-- 👶 Child profiles and caregiver management
-- 🧠 Structured autism assessment workflows and assessment history
-- 📈 Progress tracking, statistics, and reports
-- 🤖 AI-assisted caregiver guidance and recommendations using the Groq API
-- 📧 Email OTP verification and account workflows
-- 🎮 Therapy-oriented activities, games, and emotion-based exercises
-- 📊 Dashboards and data visualisation
-- 🛡️ Administrative user and assessment management
+| Contributor | GitHub | Contribution |
+|---|---|---|
+| **Syed Muhammad Ali Naqvi** | [@AliShah1029384756](https://github.com/AliShah1029384756) | Full-Stack Development & AI Integration |
+| **Shayan Ahmad** | [@shayanahmad756](https://github.com/shayanahmad756) | Core Engine & Backend Development |
+| **Ahmad Kamran** | [@Ahmadkamran73](https://github.com/Ahmadkamran73) | Frontend UI & Systems Logic |
+
+This is a **team project**. Individual ownership of every line of code is not claimed.
+
+## Key Features
+
+- Role-based authentication for Caregivers, Experts, and Administrators
+- Child profiles and caregiver management
+- Structured autism assessment workflows and assessment history
+- Progress tracking, statistics, and reports
+- AI-assisted caregiver guidance and recommendations using the Groq API
+- Email OTP verification and account workflows
+- Therapy-oriented activities, games, and emotion-based exercises
+- Dashboards and data visualisation
+- Administrative user and assessment management
 
 > **Medical note:** AutiSmart is an academic and assistive software project. Its assessments and AI-generated guidance are not a substitute for professional clinical diagnosis or treatment.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
-
-- React 19
-- Vite 7
-- React Router
-- Axios
-- Bootstrap
-- Bootstrap Icons
+- React 19 · Vite 7 · React Router · Axios · Bootstrap · Bootstrap Icons
 
 ### Backend
+- Node.js · Express.js · MongoDB · Mongoose · JWT Authentication · Nodemailer · Groq SDK / API
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT Authentication
-- Nodemailer
-- Groq SDK / API
-
-## 🏗️ System Architecture
+## System Architecture
 
 ```text
                     ┌───────────────────────────┐
@@ -88,7 +85,7 @@ The system was developed collaboratively, deployed for demonstration, and presen
       └──────────────┘    └──────────────┘    └──────────────┘
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Fyp-Autismart/
@@ -116,56 +113,34 @@ Fyp-Autismart/
 └── README.md
 ```
 
-## 🔌 Core API
+## Core API (summary)
 
 ### Authentication — `/api/auth`
-
-| Method | Endpoint | Purpose |
-|---|---|---|
-| POST | `/register` | Register a user |
-| POST | `/verify-otp` | Verify registration OTP |
-| POST | `/login` | Authenticate and receive JWT |
-| POST | `/resend-otp` | Resend verification OTP |
-| GET | `/profile` | Get authenticated profile |
-| PUT | `/change-password` | Change password |
+- POST `/register`, `/verify-otp`, `/login`, `/resend-otp`
+- GET `/profile` · PUT `/change-password`
 
 ### Admin — `/api/admin`
-
-User management, role management, account verification, assessment management, and platform statistics.
+User management, role management, account verification, assessment management, platform statistics.
 
 ### Caregiver / Child — `/api/caregiver`
-
-Child management, activities, statistics, reports, Emotion Explorer AI, and game recommendations.
+Child management, activities, statistics, reports, Emotion Explorer AI, game recommendations.
 
 ### Assessments — `/api/assessments`
+Assessment levels, child-specific quizzes, result submission, history.
 
-Assessment levels, child-specific quizzes, result submission, history, and assessment management.
-
-## 🔐 Authentication Flow
-
-```text
-Registration
-    ↓
-Email OTP Verification
-    ↓
-JWT Authentication
-    ↓
-Protected API Requests
-    ↓
-Role-Based Authorization
-```
-
-Protected requests use:
+## Authentication Flow
 
 ```text
-Authorization: Bearer <JWT_TOKEN>
+Registration → Email OTP Verification → JWT Authentication → Protected API Requests → Role-Based Authorization
 ```
 
-## ⚙️ Environment Configuration
+Protected requests use: `Authorization: Bearer <JWT_TOKEN>`
+
+## Environment Configuration
 
 Create the required environment files locally. **Never commit real credentials, API keys, passwords, JWT secrets, or database connection strings.**
 
-Backend variables include:
+Backend:
 
 ```env
 PORT=5000
@@ -183,134 +158,51 @@ Frontend:
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## 🚀 Local Installation
+## Local Installation
 
 ### Prerequisites
-
 - Node.js 18+ (20+ recommended)
 - npm 9+
 - MongoDB Atlas or local MongoDB
 - Gmail App Password for email functionality
 - Groq API key for AI features
 
-### 1. Clone
+### Steps
 
 ```bash
 git clone https://github.com/AliShah1029384756/Fyp-Autismart.git
 cd Fyp-Autismart
+
+# Backend
+cd backend && npm install && npm run dev
+
+# Frontend (new terminal)
+cd frontend && npm install && npm run dev
 ```
 
-### 2. Backend
+Backend: `http://localhost:5000` · Frontend: `http://localhost:5173` · Health: `http://localhost:5000/health`
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+## Security Notes
 
-Backend normally runs at `http://localhost:5000`.
+- Keep secrets outside Git
+- Use strong, unique JWT secrets
+- Restrict CORS to trusted frontend origins
+- Enable HTTPS in production
+- Avoid sensitive information in logs
+- Protect authentication endpoints against abuse
+- Restrict MongoDB network access
+- Rotate credentials immediately if ever exposed
 
-### 3. Frontend
+## Medical & AI Disclaimer
 
-Open another terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend normally runs at `http://localhost:5173`.
-
-### 4. Verify
-
-Backend health check:
-
-```text
-http://localhost:5000/health
-```
-
-## 📜 Available Scripts
-
-### Backend
-
-```bash
-npm run dev
-npm start
-npm run create-admin
-```
-
-### Frontend
-
-```bash
-npm run dev
-npm run build
-npm run preview
-npm run lint
-```
-
-## 🧪 Quick Start Checklist
-
-- [ ] Install Node.js and npm
-- [ ] Install backend dependencies
-- [ ] Install frontend dependencies
-- [ ] Configure MongoDB
-- [ ] Configure environment variables
-- [ ] Configure email credentials if required
-- [ ] Configure Groq API access if required
-- [ ] Start backend
-- [ ] Start frontend
-- [ ] Test registration and OTP verification
-- [ ] Test login and role-based dashboards
-- [ ] Test assessments and child management
-- [ ] Test AI features
-
-## 🛡️ Security Notes
-
-For deployment:
-
-- Keep secrets outside Git.
-- Use strong, unique JWT secrets.
-- Restrict CORS to trusted frontend origins.
-- Enable HTTPS.
-- Avoid sensitive information in logs.
-- Protect authentication endpoints against abuse and brute-force attempts.
-- Restrict MongoDB network access to trusted sources.
-- Keep dependencies updated.
-- Rotate credentials immediately if they are ever exposed.
-
-## 🌐 Deployment & Reproducibility
-
-The project has a live frontend deployment that was used for demonstration/presentation:
-
-**[🚀 Launch AutiSmart](https://auti-smart.vercel.app/)**
-
-The live deployment depends on external infrastructure and service credentials. Those original credentials are intentionally **not** included in this repository. If the hosted environment is no longer fully operational, reproduce the application locally using your own MongoDB, email, Groq, JWT, and deployment configuration.
-
-This distinction keeps the repository reproducible without exposing or depending on the team's original secrets.
-
-## 👥 Team
-
-| Contributor | GitHub | Contribution |
-|---|---|---|
-| **Syed Muhammad Ali Naqvi** | [@AliShah1029384756](https://github.com/AliShah1029384756) | Full-Stack Development & AI Integration |
-| **Shayan Ahmad** | [@shayanahmad756](https://github.com/shayanahmad756) | Core Engine & Backend Development |
-| **Ahmad Kamran** | [@Ahmadkamran73](https://github.com/Ahmadkamran73) | Frontend UI & Systems Logic |
-
-## ⚠️ Medical & AI Disclaimer
-
-AutiSmart is an **academic and assistive technology project**. Its assessments, AI-generated recommendations, and screening-related features are not intended to replace professional medical diagnosis, clinical evaluation, or treatment.
+AutiSmart is an **academic and assistive technology project**. Its assessments, AI-generated recommendations, and screening-related features are **not** intended to replace professional medical diagnosis, clinical evaluation, or treatment.
 
 Any diagnostic or therapeutic decision should be made with a qualified healthcare or autism-care professional.
 
-## 📄 License
+## License
 
-This project is distributed under the **MIT License**. See `LICENSE` for details.
+MIT License. See `LICENSE` for details.
 
 ---
-
-## ⭐ If You Find This Project Useful
-
-Consider giving the repository a ⭐ on GitHub.
 
 **Built and presented as a Final Year Project at FAST-NUCES.**
