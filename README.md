@@ -24,12 +24,8 @@
 **Institution:** FAST-NUCES, Chiniot-Faisalabad Campus  
 **Project period:** 2025–2026  
 **Type:** Team-based Final Year Project  
-**FYP-I (Semester 7):** **A+**  
-**FYP-II (Semester 8):** **A-**
-
 The system was developed collaboratively, deployed for demonstration, and presented by the team as the final-year project across FYP-I and FYP-II.
 
-> The grades above represent the project's academic outcomes. This README intentionally does not publish transcripts, CGPA, or detailed marks.
 
 ## Team vs My Contribution
 
