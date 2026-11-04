@@ -1,5 +1,7 @@
 # AutiSmart — AI-Assisted Autism Care & Assessment Platform
 
+**Repository contributor:** [Syed Muhammad Ali Naqvi](https://github.com/AliShah1029384756) — **FAST-NUCES BSCS graduate (2022–2026)**. This is a collaborative FAST-NUCES Final Year Project; my documented contribution is Full-Stack Development & AI Integration. See the [professional portfolio](https://alishah1029384756.github.io/AliShah1029384756/) for my project case study.
+
 > **A full-stack, team-based Final Year Project developed at FAST-NUCES to support autism-care workflows through structured assessment, child management, progress tracking, caregiver guidance, AI-assisted recommendations, reporting, and therapy-oriented activities.**
 
 ### Live Demo & Case Study
